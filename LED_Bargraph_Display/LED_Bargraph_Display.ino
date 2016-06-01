@@ -2,7 +2,6 @@
 
   LED Bargraph Display
   6-1-2016
-  Craig Derington
 
 */
 
@@ -23,10 +22,10 @@ void setup() {
   pinMode(led0, OUTPUT);
   pinMode(led1, OUTPUT);
  
+  // animate the display once during start-up
   AnimateDisplay(); 
   
 }
-
 
 void loop() {
   
@@ -61,7 +60,8 @@ void DisplayBar(char d)
    // define iterator
    int i;
    digitalWrite(data, HIGH);
-  
+   
+   // turn on this number of leds
    for (i=0; i < d; i++)
    {
       digitalWrite(clock, LOW);
@@ -70,8 +70,10 @@ void DisplayBar(char d)
       delay(1);
    }
    
-   digitalWrite(data, LOW);
-   for (i=0; i < 8; i++)
+   // put remaining zeros to keep leds off   
+   digitalWrite(data, LOW);   
+   
+   for (i=0; i < (8 - d); i++)
    {
      digitalWrite(clock, LOW);
      delay(1);
@@ -111,8 +113,7 @@ void AnimateDisplay()
      delay(100);
    }
   
-   // turn off the two leds
-   
+   // turn off the two leds   
    digitalWrite(led1, LOW);
    delay(100);
    digitalWrite(led0, LOW);
